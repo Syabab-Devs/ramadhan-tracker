@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Book, Calendar, Settings, History } from "lucide-react";
 import { useTranslation } from "react-i18next";
@@ -10,6 +10,7 @@ import SettingsPanel from "./components/SettingsPanel";
 import OnboardingModal from "./components/OnboardingModal";
 import { getSetting } from "./lib/db";
 import "./i18n";
+import i18n from "./i18n";
 
 // Create a client
 const queryClient = new QueryClient({
@@ -27,6 +28,18 @@ function App() {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState("quran");
   const [showOnboarding, setShowOnboarding] = React.useState(false);
+  const { data: language = i18n.language || "en" } = useQuery({
+    queryKey: ["settings", "language"],
+    queryFn: async () => {
+      const data = await getSetting("language");
+      return data || i18n.language || "en";
+    },
+  });
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language]);
+  // Language
 
   // Check if onboarding is completed
   useQuery({
