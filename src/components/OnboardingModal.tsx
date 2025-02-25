@@ -15,7 +15,7 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
   const [formData, setFormData] = React.useState({
     language: "en",
     totalPages: DEFAULT_QURAN_PAGES,
-    ramadhanEndDate: "2024-04-09",
+    ramadhanEndDate: "2025-03-31",
   });
 
   const mutation = useMutation({

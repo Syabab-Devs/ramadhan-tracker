@@ -387,16 +387,24 @@ export default function QuranTracker() {
               </div>
               <div className="space-y-2 text-sm text-emerald-800">
                 <p>
-                  To complete {target}x Khatam in {suggestion.daysLeft} days:
+                  {t("quranTracker.toCompleteKhatam", {
+                    khatam: target,
+                    daysLeft: suggestion.daysLeft,
+                  })}
+                  :
                 </p>
                 <ul className="list-disc list-inside pl-2">
                   <li>
-                    Still need to read {suggestion.remainingPages} pages (
-                    {suggestion.pages} pages per day)
+                    {t("quranTracker.suggestionPage", {
+                      remainingPages: suggestion.remainingPages,
+                      pages: suggestion.pages,
+                    })}
                   </li>
                   <li>
-                    Still need to complete {suggestion.remainingJuz} juz (
-                    {suggestion.juz} juz per day)
+                    {t("quranTracker.suggestionJuz", {
+                      remainingJuz: suggestion.remainingJuz,
+                      juz: suggestion.juz,
+                    })}
                   </li>
                 </ul>
               </div>
