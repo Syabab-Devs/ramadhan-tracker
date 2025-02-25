@@ -1,9 +1,9 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { format } from 'date-fns';
-import { getSetting, saveSettings, DEFAULT_QURAN_PAGES } from '../lib/db';
-import { Book, Globe, Calendar, X } from 'lucide-react';
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+import { saveSettings, DEFAULT_QURAN_PAGES } from "../lib/db";
+import { Book, Globe, Calendar, X } from "lucide-react";
 
 export default function OnboardingModal({ onClose }: { onClose: () => void }) {
   const { t, i18n } = useTranslation();
@@ -13,25 +13,25 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
 
   // Form state
   const [formData, setFormData] = React.useState({
-    language: 'en',
+    language: "en",
     totalPages: DEFAULT_QURAN_PAGES,
-    ramadhanEndDate: '2024-04-09'
+    ramadhanEndDate: "2024-04-09",
   });
 
   const mutation = useMutation({
     mutationFn: async (settings: typeof formData) => {
       await Promise.all([
-        saveSettings('language', settings.language),
-        saveSettings('totalQuranPages', settings.totalPages),
-        saveSettings('ramadhanEndDate', settings.ramadhanEndDate),
-        saveSettings('onboardingCompleted', true)
+        saveSettings("language", settings.language),
+        saveSettings("totalQuranPages", settings.totalPages),
+        saveSettings("ramadhanEndDate", settings.ramadhanEndDate),
+        saveSettings("onboardingCompleted", true),
       ]);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['settings'] });
+      queryClient.invalidateQueries({ queryKey: ["settings"] });
       i18n.changeLanguage(formData.language);
       onClose();
-    }
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -57,7 +57,7 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-semibold text-gray-800">
-              {t('onboarding.welcome')}
+              {t("onboarding.welcome")}
             </h2>
             <button
               onClick={onClose}
@@ -74,7 +74,7 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                 <div
                   key={index}
                   className={`h-2 flex-1 rounded-full ${
-                    index + 1 <= step ? 'bg-emerald-600' : 'bg-gray-200'
+                    index + 1 <= step ? "bg-emerald-600" : "bg-gray-200"
                   }`}
                 />
               ))}
@@ -86,11 +86,11 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                 <div className="flex items-center gap-2 mb-2">
                   <Globe className="text-emerald-600" size={24} />
                   <h3 className="text-lg font-medium">
-                    {t('onboarding.selectLanguage')}
+                    {t("onboarding.selectLanguage")}
                   </h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  {t('onboarding.languageDescription')}
+                  {t("onboarding.languageDescription")}
                 </p>
                 <select
                   value={formData.language}
@@ -111,11 +111,11 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                 <div className="flex items-center gap-2 mb-2">
                   <Book className="text-emerald-600" size={24} />
                   <h3 className="text-lg font-medium">
-                    {t('onboarding.quranPages')}
+                    {t("onboarding.quranPages")}
                   </h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  {t('settings.totalQuranPagesHelp')}
+                  {t("settings.totalQuranPagesHelp")}
                 </p>
                 <input
                   type="number"
@@ -124,7 +124,10 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                   onChange={(e) =>
                     setFormData({
                       ...formData,
-                      totalPages: Math.max(1, parseInt(e.target.value) || DEFAULT_QURAN_PAGES)
+                      totalPages: Math.max(
+                        1,
+                        parseInt(e.target.value) || DEFAULT_QURAN_PAGES
+                      ),
                     })
                   }
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
@@ -138,17 +141,20 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                 <div className="flex items-center gap-2 mb-2">
                   <Calendar className="text-emerald-600" size={24} />
                   <h3 className="text-lg font-medium">
-                    {t('onboarding.ramadhanEndDate')}
+                    {t("onboarding.ramadhanEndDate")}
                   </h3>
                 </div>
                 <p className="text-gray-600 mb-4">
-                  {t('settings.ramadhanEndDateHelp')}
+                  {t("settings.ramadhanEndDateHelp")}
                 </p>
                 <input
                   type="date"
                   value={formData.ramadhanEndDate}
                   onChange={(e) =>
-                    setFormData({ ...formData, ramadhanEndDate: e.target.value })
+                    setFormData({
+                      ...formData,
+                      ramadhanEndDate: e.target.value,
+                    })
                   }
                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-emerald-500 focus:ring-emerald-500"
                 />
@@ -162,11 +168,11 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                 onClick={handleBack}
                 className={`px-4 py-2 rounded-md text-gray-600 ${
                   step === 1
-                    ? 'invisible'
-                    : 'hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500'
+                    ? "invisible"
+                    : "hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 }`}
               >
-                {t('onboarding.back')}
+                {t("onboarding.back")}
               </button>
               {step < totalSteps ? (
                 <button
@@ -174,14 +180,14 @@ export default function OnboardingModal({ onClose }: { onClose: () => void }) {
                   onClick={handleNext}
                   className="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 >
-                  {t('onboarding.next')}
+                  {t("onboarding.next")}
                 </button>
               ) : (
                 <button
                   type="submit"
                   className="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                 >
-                  {t('onboarding.finish')}
+                  {t("onboarding.finish")}
                 </button>
               )}
             </div>
