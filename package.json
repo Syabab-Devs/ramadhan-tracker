@@ -1,7 +1,11 @@
 {
   "name": "ramadhan-tracker",
-  "private": true,
-  "version": "0.0.0",
+  "author": {
+    "name": "Ragil Burhanudin Pamungkas",
+    "email": "sipamungkas.dev@gmail.com",
+    "url": "https://sipamungkas.com"
+  },
+  "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
