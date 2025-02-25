@@ -2,6 +2,16 @@
 
 A simple web application to track your Ramadhan activities and Quran progress.
 
+## Screenshots
+
+<p>
+<img src="docs/onboarding.png" alt="Onboarding" width="200"/>
+<img src="docs/quran-tracker.png" alt="Quran Progress Tracker" width="200"/>
+<img src="docs/daily-prayer.png" alt="Daily Prayer Tracker" width="200"/>
+<img src="docs/history.png" alt="History" width="200"/>
+<img src="docs/settings.png" alt="Settings" width="200"/>
+</p>
+
 ## Features
 
 - Track your daily prayer and Quran reading activities
@@ -21,6 +31,7 @@ A simple web application to track your Ramadhan activities and Quran progress.
 3. Start tracking your activities
 
 ## Tech Stack
+
 - React
 - Tailwind CSS
 - Zod
